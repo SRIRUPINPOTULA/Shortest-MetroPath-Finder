@@ -3,81 +3,76 @@ departure station 4.*/
 
 
 #include <iostream>
-#include<vector>  
+#include<vector> 
 using namespace std;
-
-
-
-   void print_stations()
-   {
-        vector<string>purple_line={"Baiyyapanahalli", "Swami Vivekananda Road", "Indiranagar","Halasuru","Trinity","Mahathma Gandhi Road","Cubbon Park",
-        "Dr. B. R. Ambedkar Staation","Sri M Visveswaraya Station, Central College","Nadaprabhu Kempegowda Station, Majestic","Krantivira Sangolli Rayanna Railway Station", "Magadi Road","Sri Balagangadharanatha Swaji Stn., Hosahalli",
-        "Vijayanagar","Attiguppe","Deepanjali Nagar","Mysore Road","Nayandahalli","Rajarajeshwari Nagar","Jnanabharathi","Pattanagere","Kengeri Bus Terminal","Kengeri"};
-        vector<string>green_line={"Nagasandra","Dasarahalli","Jalahalli","Peenya Industry","Peenya","Goraguntepalya","Yeshwanthpur","Sandal Soap Factory","Mahalakshmi",
+vector<string>purple_line={"Baiyyapanahalli", "Swami Vivekananda Road", "Indiranagar","Halasuru","Trinity","Mahathma Gandhi Road","Cubbon Park","Dr.B.R. Ambedkar Staation","Sri M Visveswaraya Station, Central College","Nadaprabhu Kempegowda Station, Majestic","Krantivira Sangolli Rayanna Railway Station", "Magadi Road","Sri Balagangadharanatha Swaji Stn., Hosahalli", "Vijayanagar","Attiguppe","Deepanjali Nagar","Mysore Road","Nayandahalli","Rajarajeshwari Nagar","Jnanabharathi","Pattanagere","Kengeri Bus Terminal","Kengeri"};
+vector<string>green_line={"Nagasandra","Dasarahalli","Jalahalli","Peenya Industry","Peenya","Goraguntepalya","Yeshwanthpur","Sandal Soap Factory","Mahalakshmi",
         "Rajajinagar","Mahakavi Kuvempu Road","Srirammpura","Mantri Square Road","Nadaprabhu Kempegowda Station, Majestic","Chickpete","Krishna Rajendra Market","National College"
         ,"Lalbagh","South End Circle","Jayanagar","Rashtreeya Vidyalaya Road","Banashankari","Jaya Prakash Nagar","Yelachenahalli","Konanakunte Cross","Doddakallasandra"
         ,"Vajarahalli","Thalaghattapura","Silk Institute"};
-        cout<<"List of Stations on Purple Line"<<"\n";int a=0;
-        for (auto i:purple_line)
-        {
+void print_purple_stations(){
+    int a=0;
+    for (auto i:purple_line){
             cout<<a++<<". "<<i<<"\n";
-        }
-        a=0;
-        cout<<"List of Stations on Green line\n";
-        for (auto i:green_line)
-        {
+    }
+}
+void print_green_stations(){
+    int a=0;
+    for (auto i:green_line){
             cout<<a++<<". "<<i<<"\n";
-        }
-   }
-
-   void graph_metro_map()
-   {
-        vector<vector<int>>adj;
-        int nodes=58;
-        for(int i=0;i<nodes;i++)
-        {
-            for(int j=0;j<nodes;j++)
-            {
-                adj[i][j]=0;
-            }
-        }
-        
-   }
+    }
+}
 
 
-int main()
-{
+void print_complete_map(){
+    for (auto i:purple_line)
+    {
+        cout<<i<<"\t";
+    }
+    for (auto i:green_line)
+    {
+        cout<<i<<"\t";
+    }
+    cout<<"\n";
+}
+
+
+int main() {
+    cout<< "Select an Item from the below Menu\n";
     
-    cout<<"Saibaba Sri Amma Bhagavan"<<"\n";
-    cout<<"===============================================================";
-    cout<<"\tWelcome to the Bangalore Metro App!!!!!";
-    cout<<"===============================================================";
-    cout<<"Show the Options: \n";
-    cout<<"\n"<<"Pick a Choice from below:";
-    cout<<"\n 1. List all the Stations in the Map";
-    cout<<"\n 2. The Bengaluru Metro Map";
-    cout<<"\n 3. Know the shortest path between two stations";
-    cout<<"\n 4. Find the time between two Stations.";
-    cout<<"\n 5. Exit the Menu";
-    cout<<"Choose an Option: "<<"\n";
     int choice=0;
+    cout<<"1. List all the stations on Purple Line"<<"\n";
+    cout<<"2. List all the stations on Green Line"<<"\n";
+    cout<<"3. Find the distance between two stations"<<"\n";
+    cout<<"4. Exit"<<"\n";
+    
+    
+    do{
+    cout<< "Enter your choice: ";
     cin>>choice;
+    
     switch(choice)
     {
         case 1:
-            print_stations();
+            print_purple_stations();
             break;
-        /*case 2: 
-            g.graph_metro_map();
+        case 2: 
+            print_green_stations();
             break;
         case 3:
-            g.shortest_distance();
-            break;*/
-        case 5: 
+            cout<<"Available Stations are: "<<"\n";
+            print_complete_map();
+            break;
+        case 4:
+            cout<<"Thank you!!!";
             exit(0);
-        default: 
-            cout<<"Please Enter a Valid Option"<<"\n";
-            cout<<"Choose the Option fromt eh above List"<<"\n";
+            break;
+        default:
+            cout<<"Please Enter a Correct Choice";
+        
     }
-    return 0; 
+    }while(choice);
+    
+
+    return 0;
 }
