@@ -40,13 +40,6 @@ int main() {
     cout<< "Select an Item from the below Menu\n";
     
     int choice=0;
-    cout<<"1. List all the stations on Purple Line"<<"\n";
-    cout<<"2. List all the stations on Green Line"<<"\n";
-    cout<<"3. Find the distance between two stations"<<"\n";
-    cout<<"4. Exit"<<"\n";
-    
-    do{
-    cout<< "Enter your choice: ";
     cin>>choice;
     
     switch(choice)
