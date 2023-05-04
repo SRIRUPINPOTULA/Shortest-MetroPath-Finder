@@ -45,7 +45,6 @@ int main() {
     cout<<"3. Find the distance between two stations"<<"\n";
     cout<<"4. Exit"<<"\n";
     
-    
     do{
     cout<< "Enter your choice: ";
     cin>>choice;
