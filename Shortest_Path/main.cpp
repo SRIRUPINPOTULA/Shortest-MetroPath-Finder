@@ -41,10 +41,14 @@ public:
         }
         cout<<"\n";
     }
+    
+    //adds the edge between nodes
     void addEdge(string node1, string node2) {
         adjList[node1].push_back(node2);
         adjList[node2].push_back(node1);
     }
+    
+    //prints the list
     void printAdjList() {
         for (auto node : adjList) {
             cout<< node.first << " -> ";
@@ -54,6 +58,8 @@ public:
             cout << endl;
         }
     }
+    
+    //finds the path between source and destination
     void findPath(string source, string destination) {
         queue<string> q;
         map<string, bool> visited;
@@ -107,6 +113,7 @@ int main() {
         "Rajajinagar","Mahakavi Kuvempu Road","Srirammpura","Mantri Square Road","Nadaprabhu Kempegowda Station, Majestic","Chickpete","Krishna Rajendra Market","National College"
         ,"Lalbagh","South End Circle","Jayanagar","Rashtreeya Vidyalaya Road","Banashankari","Jaya Prakash Nagar","Yelachenahalli","Konanakunte Cross","Doddakallasandra"
         ,"Vajarahalli","Thalaghattapura","Silk Institute"};
+    
     // add nodes to the graph
     int n=v1.size();
     for(int i=0;i<n-1;i++)
@@ -128,6 +135,8 @@ int main() {
     cout<<"5. Exit"<<"\n";
     string source;
     string destination;
+    
+    //Menu Driven Program
     do{
         cout<< "Enter your choice: ";
         cin>>choice;
