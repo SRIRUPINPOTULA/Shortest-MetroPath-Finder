@@ -7,6 +7,7 @@ departure station 4.*/
 #include<vector> 
 #include <map>
 #include <queue>
+#include  <bits/stdc++.h>
 using namespace std;
 class Graph { 
 private: 
@@ -105,6 +106,7 @@ public:
         // destination not reachable from source
         cout << "Path not found." << endl;
     }
+    //
     //Djikstra's Algorithm
     
 
@@ -148,11 +150,13 @@ int main() {
     cout<<"3. Print the Complete Map"<<"\n";
     cout<<"4. Find the distance between two stations"<<"\n";
     cout<<"5. Exit"<<"\n";
-    string source;
-    string destination;
     do{
         cout<< "Enter your choice: ";
         cin>>choice;
+        string source;
+        string destination;
+        
+        
     switch(choice)
     {
         case 1:
@@ -168,10 +172,10 @@ int main() {
         case 4:
             cout<<"Available Stations are: "<<"\n";
             graph.print_complete_map();
-            cout << "Enter source node: ";
-            cin >> source;
-            cout << "Enter destination node: ";
-            cin >> destination;
+            cout << "Enter the source station: ";
+            getline(cin>>ws,source);
+            cout<< "Enter the destination station: ";
+            getline(cin>>ws,destination);
             graph.findPath(source, destination);
             break;
         case 5:
