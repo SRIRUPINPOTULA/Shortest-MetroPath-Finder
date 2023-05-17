@@ -1,8 +1,8 @@
 #include <iostream>
-#include<vector> 
+#include <vector> 
 #include <map>
 #include <queue>
-#include  <bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 class Graph { 
 private: 
@@ -24,7 +24,7 @@ private:
     };
     map<string, vector<string>> adjList;
     int numVertices;
-    unordered_map<string, int> stationIndices;
+    unordered_map<string, float> stationIndices;
     vector<vector<pair<float, float>>> adjacencyList;
 
 public: 
@@ -114,19 +114,18 @@ public:
     }
 
     void addEdgelength(const string& source, const string& destination, float weight) {
-        int sourceIndex = stationIndices[source];
-        int destIndex = stationIndices[destination];
+        float sourceIndex = stationIndices[source];
+        float destIndex = stationIndices[destination];
         adjacencyList[sourceIndex].push_back(make_pair(destIndex, weight));
-        adjacencyList[destIndex].push_back(make_pair(sourceIndex, weight));
     }
 
     void dijkstra(const string& source, const string& destination) {
-        int sourceIndex = stationIndices[source];
-        int destIndex = stationIndices[destination];
+        float sourceIndex = stationIndices[source];
+        float destIndex = stationIndices[destination];
 
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<float> distance(numVertices, numeric_limits<int>::max());
-        vector<int> parent(numVertices, -1);
+        priority_queue<pair<float, float>, vector<pair<float, float>>, greater<pair<float, float>>> pq;
+        vector<float> distance(numVertices, numeric_limits<float>::max());
+        vector<float> parent(numVertices, -1);
         vector<bool> visited(numVertices, false);
 
         pq.push(make_pair(0, sourceIndex));
@@ -139,7 +138,7 @@ public:
             visited[u] = true;
 
             for (const auto& neighbor : adjacencyList[u]) {
-                int v = neighbor.first;
+                float v = neighbor.first;
                 float weight = neighbor.second;
 
                 if (!visited[v] && distance[u] + weight < distance[v]) {
@@ -151,7 +150,7 @@ public:
         }
 
         vector<string> shortestPath;
-        int current = destIndex;
+        float current = destIndex;
         while (current != -1) {
             shortestPath.push_back(getStationName(current));
             current = parent[current];
@@ -198,22 +197,26 @@ int main() {
     "Jaya Prakash Nagar","Yelachenahalli","Konanakunte Cross","Doddakallasandra",
     "Vajarahalli","Thalaghattapura","Silk Institute"
     };
+    
     int n=v1.size();
     for(int i=0;i<n-1;i++)
     {
         graph.addEdge(v1[i],v1[i+1]);
-        graph.addStation(v1[i]);
     }
     
     int m=v2.size();
-    for(int j=0; j < m-1 ; j++)
+    for(int j=0; j < m-1; j++)
     {
         graph.addEdge(v2[j],v2[j+1]);
+    }
+    for(int i=0;i<n;i++)
+    {
+        graph.addStation(v1[i]);
+    }
+    for(int j=0; j < m; j++)
+    {
         graph.addStation(v2[j]);
     }
-    
-  
-
     // Adding edges
     graph.addEdgelength("Baiyyapanahall", "Swami Vivekananda Road", 1.9);
     graph.addEdgelength("Swami Vivekananda Road", "Indiranagar", 1.4);
@@ -222,9 +225,9 @@ int main() {
     graph.addEdgelength("Trinity","Mahathma Gandhi Road",5);
     graph.addEdgelength("Mahathma Gandhi Road","Cubbon Park",2.7);
     graph.addEdgelength("Cubbon Park", "Dr.B.R. Ambedkar Station", 0.6);
-    graph.addEdgelength("Dr.B.R. Ambedkar Station", "Sri M Visveswaraya Station, Central College", 750);
-    graph.addEdgelength("Sri M Visveswaraya Station, Central College", "Nadaprabhu Kempegowda Station, Majesti", 1.4);
-    graph.addEdgelength("Nadaprabhu Kempegowda Station, Majesti", "Krantivira Sangolli Rayanna Railway Station", 2.3);
+    graph.addEdgelength("Dr.B.R. Ambedkar Station", "Sri M Visveswaraya Station, Central College", 0.750);
+    graph.addEdgelength("Sri M Visveswaraya Station, Central College", "Nadaprabhu Kempegowda Station, Majestic", 1.4);
+    graph.addEdgelength("Nadaprabhu Kempegowda Station, Majestic", "Krantivira Sangolli Rayanna Railway Station", 2.3);
     graph.addEdgelength("Krantivira Sangolli Rayanna Railway Station","Magadi Road",2.3);
     graph.addEdgelength("Magadi Road","Sri Balagangadharanatha Swaji Stn., Hosahalli",1.3);
     graph.addEdgelength("Sri Balagangadharanatha Swaji Stn., Hosahalli","Vijayanagar",1.5);
@@ -237,11 +240,11 @@ int main() {
     graph.addEdgelength("Jnanabharathi","Pattanagere",2.8);
     graph.addEdgelength("Pattanagere","Kengeri Bus Terminal",4);
     graph.addEdgelength("Kengeri Bus Terminal","Kengeri",1.5);
-    //Distance of Gree Line
+    //Distance of Green Line
     graph.addEdgelength("Nagasandra","Dasarahalli",1.4);
     graph.addEdgelength("Dasarahalli","Jalahalli",0.9);
     graph.addEdgelength("Jalahalli","Peenya Industry",0.8);
-    graph.addEdgelength("Peenya","Goraguntepalya",1.9);
+    graph.addEdgelength("Peenya Industry","Goraguntepalya",1.9);
     graph.addEdgelength("Goraguntepalya","Yeshwanthpur",1.1);
     graph.addEdgelength("Yeshwanthpur","Sandal Soap Factory",2.5);
     graph.addEdgelength("Sandal Soap Factory","Mahalakshmi",1.1);
@@ -256,7 +259,7 @@ int main() {
     graph.addEdgelength("National College","Lalbagh",2.1);
     graph.addEdgelength("Lalbagh","South End Circle",1.3);
     graph.addEdgelength("South End Circle","Jayanagar",1);
-    graph.addEdgelength("Jayanagar","Rashtreeya Vidyalaya Road",900);
+    graph.addEdgelength("Jayanagar","Rashtreeya Vidyalaya Road",0.9);
     graph.addEdgelength("Rashtreeya Vidyalaya Road","Banashankari",1.4);
     graph.addEdgelength("Banashankari","Jaya Prakash Nagar",0.8);
     graph.addEdgelength("Jaya Prakash Nagar","Yelachenahalli",1.4);
@@ -303,13 +306,14 @@ int main() {
             graph.findPath(source, destination);
             break;
         case 5:
-            cout<<"Print Available Stations: "<<"\n";
+            cout<<"Available Stations: "<<"\n";
             graph.print_complete_map();
             cout<<"Enter the source station: ";
             getline(cin>>ws,source);
             cout<<"Enter the destination: ";
             getline(cin>>ws,destination);
             graph.dijkstra(source, destination);
+            break;
         case 6:
             cout<<"Thank you!!!";
             exit(0);
