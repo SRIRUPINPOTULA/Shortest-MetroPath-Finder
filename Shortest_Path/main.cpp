@@ -1,10 +1,3 @@
-/* 1.Show the metro map 2.View the stations 3.Find the intermediate 
-stations based on the source and 
-departure station 4.*/
-
-Add distances between stations and compile the code.
-
-
 #include <iostream>
 #include<vector> 
 #include <map>
@@ -32,7 +25,7 @@ private:
     map<string, vector<string>> adjList;
     int numVertices;
     unordered_map<string, int> stationIndices;
-    vector<vector<pair<int, int>>> adjacencyList;
+    vector<vector<pair<float, float>>> adjacencyList;
 
 public: 
 
@@ -120,19 +113,19 @@ public:
         adjacencyList.resize(numVertices);
     }
 
-    void addEdgelength(const string& source, const string& destination, int weight) {
+    void addEdgelength(const string& source, const string& destination, float weight) {
         int sourceIndex = stationIndices[source];
         int destIndex = stationIndices[destination];
         adjacencyList[sourceIndex].push_back(make_pair(destIndex, weight));
         adjacencyList[destIndex].push_back(make_pair(sourceIndex, weight));
     }
 
-    vector<string> dijkstra(const string& source, const string& destination) {
+    void dijkstra(const string& source, const string& destination) {
         int sourceIndex = stationIndices[source];
         int destIndex = stationIndices[destination];
 
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<int> distance(numVertices, numeric_limits<int>::max());
+        vector<float> distance(numVertices, numeric_limits<int>::max());
         vector<int> parent(numVertices, -1);
         vector<bool> visited(numVertices, false);
 
@@ -147,7 +140,7 @@ public:
 
             for (const auto& neighbor : adjacencyList[u]) {
                 int v = neighbor.first;
-                int weight = neighbor.second;
+                float weight = neighbor.second;
 
                 if (!visited[v] && distance[u] + weight < distance[v]) {
                     distance[v] = distance[u] + weight;
@@ -165,7 +158,12 @@ public:
         }
 
         reverse(shortestPath.begin(), shortestPath.end());
-        return shortestPath;
+        for (const auto& station : shortestPath) {
+        cout << station << " -> ";
+        
+    }
+        cout<<""<<distance[destIndex];       
+        cout << " End" << endl;        
     }
 
 private:
@@ -211,14 +209,10 @@ int main() {
     for(int j=0; j < m-1 ; j++)
     {
         graph.addEdge(v2[j],v2[j+1]);
-        graph.addStation(v2[i]);
+        graph.addStation(v2[j]);
     }
     
-    /*graph.addStation("A");
-    graph.addStation("B");
-    graph.addStation("C");
-    graph.addStation("D");
-    graph.addStation("E");*/
+  
 
     // Adding edges
     graph.addEdgelength("Baiyyapanahall", "Swami Vivekananda Road", 1.9);
@@ -271,25 +265,15 @@ int main() {
     graph.addEdgelength("Doddakallasandra","Vajarahalli",1.9);
     graph.addEdgelength("Vajarahalli","Thalaghattapura",1);
     graph.addEdgelength("Thalaghattapura","Silk Institute",1.4);
-    // Finding shortest path
-    string source = "A";
-    string destination = "E";
-    vector<string> shortestPath = graph.dijkstra(source, destination);
-
-    // Displaying shortest path
-    cout << "Shortest path from " << source << " to " << destination << ": ";
-    for (const auto& station : shortestPath) {
-        cout << station << " -> ";
-    }
-    cout << "End" << endl;
     
-    /*
+    
     int choice=0;
     cout<<"1. List all the stations on Purple Line"<<"\n";
     cout<<"2. List all the stations on Green Line"<<"\n";
     cout<<"3. Print the Complete Map"<<"\n";
     cout<<"4. Find the distance between two stations"<<"\n";
-    cout<<"5. Exit"<<"\n";
+    cout<<"5. Display the Shortest Path and Distance between two stations"<<"\n";
+    cout<<"6. Exit"<<"\n";
     do{
         cout<< "Enter your choice: ";
         cin>>choice;
@@ -319,6 +303,14 @@ int main() {
             graph.findPath(source, destination);
             break;
         case 5:
+            cout<<"Print Available Stations: "<<"\n";
+            graph.print_complete_map();
+            cout<<"Enter the source station: ";
+            getline(cin>>ws,source);
+            cout<<"Enter the destination: ";
+            getline(cin>>ws,destination);
+            graph.dijkstra(source, destination);
+        case 6:
             cout<<"Thank you!!!";
             exit(0);
             break;
@@ -327,7 +319,7 @@ int main() {
         
     }
     }while(choice);
-    */
+    
     
     return 0;
 }
