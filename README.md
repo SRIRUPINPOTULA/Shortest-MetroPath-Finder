@@ -7,9 +7,10 @@ A. Methodology Adapted:
   In this implementation, it is considered to develope a graph where the edges are the path between any two metro stations and stations are graph nodes. 
 B. Algorithms Used: 
 1. BFS 
-2. Dijkstra's Algorithm.
+2. Dijkstra's Algorithm
 C. Implemenation:
   An approach of menu-driven program is presented that gives the user to select various options to display the various stations to print the shortest path.
+
 D. Compilation: 
 Command Used: 1. clang++ -std=c++11 main.cpp -o main
               2. ./main
