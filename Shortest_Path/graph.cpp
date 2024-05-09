@@ -19,6 +19,26 @@ Graph::Graph() : numVertices(0) {
         "Jaya Prakash Nagar","Yelachenahalli","Konanakunte Cross","Doddakallasandra",
         "Vajarahalli","Thalaghattapura","Silk Institute"
     };
+
+    purple_line_stations ={"Baiyyapanahalli","Swami Vivekananda Road","Indiranagar","Halasuru",
+        "Trinity","Mahathma Gandhi Road","Cubbon Park","Dr.B.R. Ambedkar Station",
+        "Sri M Visveswaraya Station, Central College","Nadaprabhu Kempegowda Station, Majestic",
+        "Krantivira Sangolli Rayanna Railway Station","Magadi Road","Sri Balagangadharanatha Swaji Stn., Hosahalli",
+        "Vijayanagar","Attiguppe","Deepanjali Nagar","Mysore Road","Nayandahalli","Rajarajeshwari Nagar",
+        "Jnanabharathi","Pattanagere","Kengeri Bus Terminal","Kengeri"
+
+    };
+
+    green_line_stations = {"Nagasandra","Dasarahalli","Jalahalli","Peenya Industry","Peenya",
+        "Goraguntepalya","Yeshwanthpur","Sandal Soap Factory","Mahalakshmi",
+        "Rajajinagar","Mahakavi Kuvempu Road","Srirammpura","Mantri Square Road",
+        "Nadaprabhu Kempegowda Station, Majestic","Chickpete","Krishna Rajendra Market","National College",
+        "Lalbagh","South End Circle","Jayanagar","Rashtreeya Vidyalaya Road","Banashankari",
+        "Jaya Prakash Nagar","Yelachenahalli","Konanakunte Cross","Doddakallasandra",
+        "Vajarahalli","Thalaghattapura","Silk Institute"
+
+    };
+
 }
 
 string Graph::getPurpleStationsString() {
@@ -89,6 +109,21 @@ string Graph::findPath(string source, string destination) {
     {
         addStation(green_line[j]);
     }
+    string res;
+    if(purple_line_stations.find(source) != purple_line_stations.end() && green_line_stations.find(destination)!=green_line_stations.end())
+    {
+        res="Change to Green line at Majestic";
+    }
+
+    else if(purple_line_stations.find(destination) != purple_line_stations.end() && green_line_stations.find(source)!=green_line_stations.end())
+    {
+        res="Change to Purple line at Majestic";
+    }
+
+    else
+    {
+        res="Stay on the Same line";
+    }
 
     queue<string> q;
     map<string, bool> visited;
@@ -114,7 +149,7 @@ string Graph::findPath(string source, string destination) {
             for (int i = path.size() - 1; i >= 0; i--) {
                 pathString += path[i] + "\n";
             }
-            return pathString;
+            return res+"\n"+pathString;
         }
 
         for (auto neighbor : adjList[node]) {
@@ -129,7 +164,8 @@ string Graph::findPath(string source, string destination) {
     return "Path not found.";
 }
 
-string Graph::djikstra(string source, string destination) {
+//string Graph::djikstra(string source, string destination) {
+pair<string, string> Graph::djikstra(string source, string destination) {
     int n=purple_line.size();
     for(int i=0;i<n-1;i++)
     {
@@ -149,6 +185,22 @@ string Graph::djikstra(string source, string destination) {
     {
         addStation(green_line[j]);
     }
+    string res;
+    if(purple_line_stations.find(source) != purple_line_stations.end() && green_line_stations.find(destination)!=green_line_stations.end())
+    {
+        res="Change to Green line at Majestic";
+    }
+
+    else if(purple_line_stations.find(destination) != purple_line_stations.end() && green_line_stations.find(source)!=green_line_stations.end())
+    {
+        res="Change to Purple line at Majestic";
+    }
+
+    else
+    {
+        res="Stay on the Same line";
+    }
+
 
     addEdgelength("Baiyyapanahall", "Swami Vivekananda Road", 1.9);
     addEdgelength("Swami Vivekananda Road", "Indiranagar", 1.4);
@@ -201,6 +253,57 @@ string Graph::djikstra(string source, string destination) {
     addEdgelength("Vajarahalli","Thalaghattapura",1);
     addEdgelength("Thalaghattapura","Silk Institute",1.4);
 
+    //Reverselist
+    addEdgelength("Swami Vivekananda Road","Baiyyapanahall", 1.9);
+    addEdgelength( "Indiranagar","Swami Vivekananda Road", 1.4);
+    addEdgelength("Halasuru","Indiranagar",1.4);
+    addEdgelength("Trinity","Halasuru",1.1);
+    addEdgelength("Mahathma Gandhi Road","Trinity",5);
+    addEdgelength("Cubbon Park","Mahathma Gandhi Road",2.7);
+    addEdgelength( "Dr.B.R. Ambedkar Station","Cubbon Park", 0.6);
+    addEdgelength( "Sri M Visveswaraya Station, Central College", "Dr.B.R. Ambedkar Station",0.750);
+    addEdgelength( "Nadaprabhu Kempegowda Station, Majestic", "Sri M Visveswaraya Station, Central College",1.4);
+    addEdgelength( "Krantivira Sangolli Rayanna Railway Station", "Nadaprabhu Kempegowda Station, Majestic",2.3);
+    addEdgelength("Magadi Road","Krantivira Sangolli Rayanna Railway Station",2.3);
+    addEdgelength("Sri Balagangadharanatha Swaji Stn., Hosahalli","Magadi Road",1.3);
+    addEdgelength("Vijayanagar","Sri Balagangadharanatha Swaji Stn., Hosahalli",1.5);
+    addEdgelength("Attiguppe","Vijayanagar",1);
+    addEdgelength("Deepanjali Nagar","Attiguppe",2.3);
+    addEdgelength("Mysore Road","Deepanjali Nagar",4.5);
+    addEdgelength("Nayandahalli","Mysore Road",1.1);
+    addEdgelength("Rajarajeshwari Nagar","Nayandahalli",2.1);
+    addEdgelength("Jnanabharathi","Rajarajeshwari Nagar",3.0);
+    addEdgelength("Pattanagere","Jnanabharathi",2.8);
+    addEdgelength("Kengeri Bus Terminal","Pattanagere",4);
+    addEdgelength("Kengeri","Kengeri Bus Terminal",1.5);
+    addEdgelength("Dasarahalli","Nagasandra",1.4);
+    addEdgelength("Jalahalli","Dasarahalli",0.9);
+    addEdgelength("Peenya Industry","Jalahalli",0.8);
+    addEdgelength("Goraguntepalya","Peenya Industry",1.9);
+    addEdgelength("Yeshwanthpur","Goraguntepalya",1.1);
+    addEdgelength("Sandal Soap Factory","Yeshwanthpur",2.5);
+    addEdgelength("Mahalakshmi","Sandal Soap Factory",1.1);
+    addEdgelength("Rajajinagar","Mahalakshmi",0.85);
+    addEdgelength("Mahakavi Kuvempu Road","Rajajinagar",1.7);
+    addEdgelength("Srirammpura","Mahakavi Kuvempu Road",0.4);
+    addEdgelength("Mantri Square Road","Srirammpura",2.5);
+    addEdgelength("Nadaprabhu Kempegowda Station, Majestic","Mantri Square Road",2.2);
+    addEdgelength("Chickpete","Nadaprabhu Kempegowda Station, Majestic",1.5);
+    addEdgelength("Chickpete","Krishna Rajendra Market",1.5);
+    addEdgelength("National College","Krishna Rajendra Market",1.8);
+    addEdgelength("Lalbagh","National College",2.1);
+    addEdgelength("South End Circle","Lalbagh",1.3);
+    addEdgelength("South End Circle","Jayanagar",1);
+    addEdgelength("Rashtreeya Vidyalaya Road","Jayanagar",0.9);
+    addEdgelength("Banashankari","Rashtreeya Vidyalaya Road",1.4);
+    addEdgelength("Jaya Prakash Nagar","Banashankari",0.8);
+    addEdgelength("Yelachenahalli","Jaya Prakash Nagar",1.4);
+    addEdgelength("Konanakunte Cross","Yelachenahalli",1.1);
+    addEdgelength("Doddakallasandra","Konanakunte Cross",1.6);
+    addEdgelength("Vajarahalli","Doddakallasandra",1.9);
+    addEdgelength("Thalaghattapura","Vajarahalli",1);
+    addEdgelength("Silk Institute","Thalaghattapura",1.4);
+
     float sourceIndex = stationIndices[source];
     float destIndex = stationIndices[destination];
 
@@ -244,6 +347,11 @@ string Graph::djikstra(string source, string destination) {
     for (const auto& station : shortestPath) {
         path += station + "\n";
     }
+    float totalDistance = distance[destIndex];
 
-    return path;
+    string distanceStr = "Total Distance: " + to_string(totalDistance) + " km";
+
+    return make_pair(res + "\n" + path, distanceStr);
+
+    //return res+"\n"+path;
 }

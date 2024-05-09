@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <limits>
 #include <algorithm>
+#include <set>
 using namespace std;
 
 class Graph {
@@ -15,6 +16,8 @@ public:
     vector<string> purple_line;
     vector<string> green_line;
     map<string,vector<string>> adjList;
+    set<string>purple_line_stations;
+    set<string>green_line_stations;
     int numVertices;
     unordered_map<string, float> stationIndices;
     vector<vector<pair<float, float>>> adjacencyList;
@@ -31,8 +34,8 @@ public:
     void addEdgelength(string source, string destination, float weight);
     string getStationName(int index);
     string findPath(string source, string destination);
-    string djikstra(string source, string destination);
-
+    //string djikstra(string source, string destination);
+    pair<string, string> djikstra(string source, string destination);
 
 };
 

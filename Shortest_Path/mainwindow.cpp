@@ -75,8 +75,16 @@ void MainWindow::on_pushButton_pressed()
 
     else if(method=="Djikstra's Algorithm")
     {
-        QString pathFound = QString::fromStdString(graph.djikstra(sourceText.toStdString(), destText.toStdString()));
-        QMessageBox::information(this, "Path Found", pathFound);
+        pair<string, string> result = graph.djikstra(sourceText.toStdString(), destText.toStdString());
+
+        // Combine the path and distance strings
+        QString pathAndDistance = QString::fromStdString(result.first + "\n" + result.second);
+
+        // Display the information in a QMessageBox
+        QMessageBox::information(this, "Path Found", pathAndDistance);
+
+        //QString pathFound = QString::fromStdString(graph.djikstra(sourceText.toStdString(), destText.toStdString()));
+        //QMessageBox::information(this, "Path Found", pathFound);
     }
     else if (method == "All Stations") {
         QString allStations = QString::fromStdString(graph.getPurpleStationsString() + "\n" + graph.getGreenStationsString());
