@@ -31,6 +31,3 @@ Additionally, a dropdown menu has been introduced, offering users several option
 4. Path Finding: Upon inputting the source and destination stations and selecting the algorithm, users can initiate the process of finding the shortest path. The GUI displays the path along with the total distance between the source and destination stations.
 
 Furthermore, the GUI incorporates a prompt mechanism that dynamically suggests whether the user should consider changing lines based on the destination station. This feature enhances user guidance, ensuring a smoother navigation experience throughout the transit system.
-
-A sample image would look like:
-<img width="799" alt="image" src="https://github.com/SRIRUPINPOTULA/Shortest-MetroPath-Finder/assets/58518732/7cf0968c-43a1-4071-82d9-8c1cbab54560">
