@@ -22,7 +22,7 @@ Command Used: 1. clang++ -std=c++11 main.cpp -o main
 
 **Method - 2:**
 
-To enhance user experience and provide a more intuitive interface, the existing C++ implementation of the shortest path finder has been integrated into a graphical user interface (GUI) using Qt. This transition allows users to input the source and destination stations via text entry bars.
+To enhance user experience and provide a more intuitive interface, the existing C++ implementation of the shortest path finder has been integrated into a graphical user interface (GUI) using Qt (which can be found in Shortest_Path directory for further details). This transition allows users to input the source and destination stations via text entry bars.
 
 Additionally, a dropdown menu has been introduced, offering users several options for interaction:
 1. List of All Stations: This option provides users with a comprehensive list of all available stations.
